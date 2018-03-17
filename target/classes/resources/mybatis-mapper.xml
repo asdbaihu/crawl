@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.langchao.bigdata.dao.CsdnDao">
+ 	<insert id="addCsdn" parameterType="map">
+ 	INSERT INTO csdnblog(id,title,date,tags,category,view,comments,copyright) 
+ 	values(#{id},#{title},#{date},#{tags},#{categor},#{view},#{comments},#{copyright})
+ 	</insert>
+ 	
+ 	<insert id="addCiopi" parameterType="map">
+ 		INSERT INTO ciopi(title,content) values(#{title},#{content})
+ 	</insert>
+ 	
+ 		<insert id="addCountryInfo" parameterType="map">
+ 		  INSERT INTO st_pd_country(ID,COUN_CODE, COUN_NAME, SHORT_NAME, ENGL_NAME, ENGL_SHORT_NAME, CONTINENT, IN_USE) 
+			VALUES (#{id},#{counCode}, #{counName}, #{shortName}, #{engName}, #{shortEngName}, '', '1');
+ 		</insert>
+ 		
+ 		<insert id="addBsEntBasic" parameterType="map">
+ 		INSERT INTO bs_ent_basic (
+	ENT_ID,
+	USC_CODE,
+	REG_CODE,
+	ENT_NAME,
+	MMB_TYPE,
+	EST_DATE,
+	LEG_REP,
+	REG_CAP,
+	DOM,
+	OP_SCOPE,
+	OP_FROM,
+	OP_TO,
+	REG_ORG,
+	APPR_DATE,
+	PROC_LOC,
+	YIE_DIST,
+	REG_CAP_CUR,
+	OP_STATE,
+	FOR_ENTER_NAME,
+	For_DOM,
+	INDU_CODE,
+	POST_CODE,
+	PHONE,
+	CM_CODE,
+	IS_VALID,
+	UPDATE_DATE,
+	CREDIT_RATING,
+	GXBINDU_CODE
+)
+VALUES
+	(
+	#{ENT_ID},
+	#{USC_CODE},
+	#{REG_CODE},
+	#{ENT_NAME},
+	#{MMB_TYPE},
+	#{EST_DATE},
+	#{LEG_REP},
+	#{REG_CAP},
+	#{DOM},
+	#{OP_SCOPE},
+	#{OP_FROM},
+	#{OP_TO},
+	#{REG_ORG},
+	#{APPR_DATE},
+	#{PROC_LOC},
+	#{YIE_DIST},
+	#{REG_CAP_CUR},
+	#{OP_STATE},
+	#{FOR_ENTER_NAME},
+	#{For_DOM},
+	#{INDU_CODE},
+	#{POST_CODE},
+	#{PHONE},
+	#{CM_CODE},
+	#{IS_VALID},
+	#{UPDATE_DATE},
+	#{CREDIT_RATING},
+	#{GXBINDU_CODE}
+	)
+ 		
+ 		</insert>
+ 		
+ 		<insert id="addBsEntTrAn" parameterType="map">
+ 	INSERT INTO  BS_ENT_TR_AN (
+	ENT_ID,
+	AN_CHE_DATE,
+	ANCHE_YEAR,
+	REG_CODE,
+	USC_CODE,
+	ENT_NAME,
+	TEL,
+	ADDR,
+	POST_CODE,
+	EMAIL,
+	BUSI_STATUS,
+	EMP_NUM,
+	ISSUE_DEPTID,
+	IS_VALID,
+	UPDATE_DATE
+)
+VALUES
+	(
+	#{ENT_ID},
+	#{AN_CHE_DATE},
+	#{ANCHE_YEAR},
+	#{REG_CODE},
+	#{USC_CODE},
+	#{ENT_NAME},
+	#{TEL},
+	#{ADDR},
+	#{POST_CODE},
+	#{EMAIL},
+	#{BUSI_STATUS},
+	#{EMP_NUM,jdbcType=INTEGER},
+	#{ISSUE_DEPTID},
+	#{IS_VALID},
+	#{UPDATE_DATE}
+	)
+ 		
+ 		</insert>
+ 		
+ 		<select id="selectBaseDict" parameterType="map" resultType="map">
+ 		SELECT T.DICT_KEY FROM BASE_DICT T WHERE T.DICT_ID='OM_D_MMB_TYPE'
+ 		 AND T.DICT_VALUE    LIKE CONCAT('%',#{MMB_TYPE},'%')
+ 		</select>
+ 		
+</mapper>

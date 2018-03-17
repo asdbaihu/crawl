@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/tx 
+      http://www.springframework.org/schema/tx/spring-tx.xsd 
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+          <property name="dataSource" ref="dataSource" />
+            <property name="mapperLocations" value="classpath:resources/mybatis-mapper.xml" />  
+    </bean>
+   <!-- 如果使用注解方式，请打开此配置,mybais配置请注释 -->
+<!--     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"> -->
+<!--    	 <constructor-arg index="0" ref="sqlSessionFactory"/> -->
+<!-- 	</bean> -->
+
+	<!-- 映射mybatis配置 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.langchao.*" />
+    </bean>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/test?characterEncoding=UTF-8" />
+        <property name="username" value="root" />
+        <property name="password" value="root" />
+    </bean>
+    
+     <!-- 配置spring的PlatformTransactionManager，名字为默认值 -->  
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource" ref="dataSource" />  
+    </bean>  
+      
+    <!-- 开启事务控制的注解支持 -->  
+    <tx:annotation-driven transaction-manager="transactionManager"/> 
+
+</beans>
